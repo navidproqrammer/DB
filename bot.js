@@ -12,12 +12,9 @@ bot.on('ready', async () =>{
 bot.on("message",message=>{
 
   let args = message.content.substring(PREFIX.length).split(" ");
-
-  if(message.author.bot) return
-  if(message.content.startsWith(prefix +"dmall")){
-  	
-  	let msg = message.content.slice((prefix +"dmall ").length)
-
+  switch(args[0]){
+    case 'dm':
+  	let msg = message.content.slice((prefix +"dm ").length)
     if(!message.member.hasPermission("ADMINISTRATOR"))
 return message.channel.send("**You don't have permission to use that command**");
 
@@ -28,10 +25,11 @@ return message.channel.send("**You don't have permission to use that command**")
         
       }
       return message.channel.send("Sending DM to all, it may take a while")
+      break;
   }
 
 })
-    switch(args[0]){
+    switch(args[1]){
         case 'ping':
             message.channel.send('pong!')
             break;
