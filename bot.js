@@ -11,10 +11,11 @@ bot.on('ready', async () =>{
 
 bot.on("message",message=>{
 
-  let args = message.content.substring(PREFIX.length).split(" ");
-  switch(args[0]){
-    case 'dm':
-  	let msg = message.content.slice((prefix +"dm ").length)
+  if(message.author.bot) return
+  if(message.content.startsWith(prefix +"dmall")){
+  	
+  	let msg = message.content.slice((prefix +"dmall ").length)
+
     if(!message.member.hasPermission("ADMINISTRATOR"))
 return message.channel.send("**You don't have permission to use that command**");
 
@@ -25,29 +26,8 @@ return message.channel.send("**You don't have permission to use that command**")
         
       }
       return message.channel.send("Sending DM to all, it may take a while")
-      break;
   }
 
 })
-    switch(args[1]){
-        case 'ping':
-            message.channel.send('pong!')
-            break;
-       case 'clear':
-           if(!args[1]) return message.reply('Error please define second arg')
-           message.channel.bulkDelete(args[1]);
-           break;
-        case 'info':
-            if(args[1] === 'version'){
-                message.channel.send('Version ' + version);
-            }  else{
-                message.channel.send('Invalid Args');
-            }      
-            break;
-            case 'embed':
-                const embed = new Discord.richEmbed()
-                .addField('Name', message.author.username);
-                message.channel.send(embed);
-            break;    
-                  }
+
 bot.login(process.env.token);
