@@ -1,6 +1,7 @@
 ﻿const Discord = require("discord.js");
 const bot = new Discord.Client({ disableEveryone: true });
 const readline = require("readline");
+const manager = require("./manager");
 var prefix = "$";
 
 bot.on('ready', async () =>{
