@@ -8,13 +8,12 @@ bot.on('ready', async () =>{
   bot.user.setActivity('║ Shift ║', {type: 'LISTENING'})
 })
 
-
 bot.on("message",message=>{
-
-  if(message.author.bot) return
-  if(message.content.startsWith(prefix +"dmall")){
+  client.on('message', function(message){
+    if(message.author.bot) return;
+  if(message.content.startsWith(prefix +"dm")){
   	
-  	let msg = message.content.slice((prefix +"dmall ").length)
+  	let msg = message.content.slice((prefix +"dm ").length)
 
     if(!message.member.hasPermission("ADMINISTRATOR"))
 return message.channel.send("**You don't have permission to use that command**");
@@ -27,7 +26,10 @@ return message.channel.send("**You don't have permission to use that command**")
       }
       return message.channel.send("Sending DM to all, it may take a while")
   }
-
-})
-
-bot.login(process.env.token);
+  else if(message.content.startsWith(prefix +"clear")){
+    if(!args[1]) return message.reply('Error please define second arg')
+           message.channel.bulkDelete(args[1]);
+  }
+  bot.login(process.env.token);
+  });
+});
